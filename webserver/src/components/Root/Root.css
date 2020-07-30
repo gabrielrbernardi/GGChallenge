@@ -1,0 +1,16 @@
+*{
+    overflow: hidden;
+}
+
+.zoom-hover{
+    transition: .3s ease;
+}
+
+.zoom-hover:hover{
+    transform: scale(1.04);
+}
+
+
+.text-decoration-none{
+    color: #6c757d;
+}
