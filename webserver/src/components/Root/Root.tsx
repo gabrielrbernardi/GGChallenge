@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import {RiLoginBoxLine} from 'react-icons/ri';
 import {IoIosCreate} from 'react-icons/io';
 
@@ -8,14 +8,6 @@ import Header from '../Header/Header';
 import './Root.css';
 
 const Root = () => {
-    const history = useHistory();
-
-    const [getSignUpIsActive, setSignUpIsActive] = useState<Boolean>(false);
-
-    // useEffect(() =>{
-    //     history.push('/signup');
-    // }, []);
-   
     return (
         <>
         <Header/>

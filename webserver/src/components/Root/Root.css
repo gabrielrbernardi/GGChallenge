@@ -1,5 +1,5 @@
 *{
-    overflow: hidden;
+    overflow-y: hidden;
 }
 
 .zoom-hover{
@@ -7,7 +7,7 @@
 }
 
 .zoom-hover:hover{
-    transform: scale(1.04);
+    transform: scale(1.02);
 }
 
 
