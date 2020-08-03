@@ -12,22 +12,22 @@ const Root = () => {
         <>
         <Header/>
         <div className="m-5 p-3 row">
-            <Link className="text-decoration-none col-sm-6 mx-auto" to="/login">
-                <div className="card text-center shadow zoom-hover">
+            <div className="card text-center shadow zoom-hover col-sm-5 mx-auto py-2">
+                <Link className="text-decoration-none" to="/login">
                     <RiLoginBoxLine className="mt-3 mb-3 ml-auto mr-auto" size={40} />
                     <p className="h6 text-secondary">
                         <strong>CONECTAR</strong>
                     </p>
-                </div>
-            </Link>
-            <Link className="text-decoration-none col-sm-6 mx-auto" to="/signup">
-                <div className="card text-center shadow zoom-hover">
+                </Link>
+            </div>
+            <div className="card text-center shadow zoom-hover col-sm-5 mx-auto py-2">
+                <Link className="text-decoration-none" to="/signup">
                     <IoIosCreate className="mt-3 mb-3 ml-auto mr-auto" size={40} />
                     <p className="h6 text-secondary">
                         <strong>CADASTRAR</strong>
                     </p>
-                </div>
-            </Link>
+                </Link>
+            </div>
         </div>
         </>
     )
