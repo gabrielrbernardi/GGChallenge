@@ -5,16 +5,15 @@ import Toast from 'react-bootstrap/Toast';
 import Header from '../Header/Header';
 
 import logo from '../../assets/logo.png';
+import { useHistory } from 'react-router';
 
 const Login = () => {
+    const history = useHistory();
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [signedIn, setSignedIn] = useState<boolean>(false);
     const [isSigningIn, setIsSigningIn] = useState<boolean>(false);
-    const [,setIsSigningOut] = useState<boolean>(false);
     const [rememberCheckbox, setRememberCheckbox] = useState<boolean>(false);
-    const [tokenId, setTokenId] = useState<string>('');
-    const [refreshToken, setRefreshToken] = useState<string>('');
 
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState<string>('');
@@ -41,8 +40,7 @@ const Login = () => {
                 showToastFunction("Usuário conectado!", 2);
                 setSignedIn(true);
                 setIsSigningIn(false);
-                setTokenId(responseUserSession.getIdToken().getJwtToken());
-                setRefreshToken(responseUserSession.getRefreshToken().getToken());
+                history.push("/home");
             })
             .catch((err) => {
                 setIsSigningIn(false);
@@ -69,8 +67,7 @@ const Login = () => {
                     console.log(responseUserSession);
                     setSignedIn(true);
                     setIsSigningIn(false);
-                    setTokenId(responseUserSession.getIdToken().getJwtToken());
-                    setRefreshToken(responseUserSession.getRefreshToken().getToken());
+                    history.push("/home");
                 })
                 .catch(err => {
                     showToastFunction("Erro na autenticação do usuário. " + err.code, 1);
@@ -80,23 +77,6 @@ const Login = () => {
                 if(err.code === "NotAuthorizedException"){
                     showToastFunction("Usuário/email ou senha incorretos. Verifique-os e tente novamente.", 1);
                 }
-            })
-        }
-    }
-
-    function handleLogout(){
-        if(signedIn){
-            setIsSigningOut(true);
-            Auth.signOut()
-            .then(response => {
-                setSignedIn(false);
-                setIsSigningOut(false);
-                setTokenId('');
-                setRefreshToken('');
-                console.log(response);
-            }).catch(err => {
-                setIsSigningOut(false);
-                console.log(err);
             })
         }
     }
@@ -125,7 +105,7 @@ const Login = () => {
 
     return (
         <>
-            <Header/>
+            <Header login={signedIn}/>
             <Toast show={showToast} onClose={toggleShowToast} delay={5000} autohide style={{position: 'fixed', bottom: 0, right: 0, zIndex: 999, maxWidth: '200px'}}>
                 <Toast.Header className={toastClassName} >
                     <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
@@ -135,22 +115,15 @@ const Login = () => {
             </Toast>
             <div className="col-sm-4 bg-light text-center offset-sm-4 mt-5 rounded">
                 {!signedIn &&
-                    <div className="row justify-content-center mt-5 mb-5"><img src={logo} style={{width:'24%', height: '24%'}} alt="logo"/></div>
+                    <div className="row justify-content-center mt-5 mb-5"><img src={logo} style={{width:'25%', height: '25%',  minWidth: '80px', minHeight: '50px'}} alt="logo"/></div>
                 }
                 <div className="row justify-content-center mt-2 mb-5">
                     {signedIn && 
                         <>
                             <p className="text-danger h2">Seja Bem-Vindo</p>
                             <div className="row justify-content-center mt-5 mb-5"><img src={logo} style={{width:'48%', height: '96%'}} alt="logo"/></div>                    
-                            <button className="btn-toggle btn btn-danger" onClick={handleLogout}>Desconectar</button>
                         </>
                     }
-                    {/* {signedIn &&
-                        <>
-                            <p>tokenID: {tokenId}</p>
-                            <p>refreshToken: {refreshToken}</p>
-                        </>
-                    } */}
                     {!signedIn &&
                         <form className="text-center" onSubmit={handleSubmit}>
                             <div className="form-group">

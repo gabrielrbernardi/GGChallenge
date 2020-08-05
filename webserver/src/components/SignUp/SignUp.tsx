@@ -3,8 +3,6 @@ import { Link, useHistory } from 'react-router-dom';
 import {Auth} from 'aws-amplify';
 import Toast from 'react-bootstrap/Toast';
 
-import Header from '../Header/Header';
-
 import logo from '../../assets/logo.png';
 
 const SignUp = () => {
@@ -141,7 +139,6 @@ const SignUp = () => {
     
     return (
         <>
-            <Header/>
             <Toast show={showToast} onClose={toggleShowToast} delay={5000} autohide style={{position: 'fixed', bottom: 0, right: 0, zIndex: 999, maxWidth: '200px'}}>
                 <Toast.Header className={toastClassName} >
                     <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
@@ -150,8 +147,8 @@ const SignUp = () => {
                 <Toast.Body>{toastMessage}</Toast.Body>
             </Toast>
             <div className="col-sm-4 bg-light text-center offset-sm-4 mt-5 rounded">
-                <div className="row justify-content-md-center mt-5 mb-5"><img src={logo} style={{width:'24%', height: '24%'}} alt="logo"/></div>
-                <div className="row justify-content-md-center mt-2 mb-5">
+                <div className="row justify-content-center mt-5 mb-5"><img src={logo} style={{width:'25%', height: '25%',  minWidth: '80px', minHeight: '50px'}} alt="logo"/></div>
+                <div className="row justify-content-center mt-2 mb-5">
                     {getConfirmed &&
                         <></>
                     }
