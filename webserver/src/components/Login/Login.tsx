@@ -1,11 +1,11 @@
 import React, { useState, FormEvent, useEffect } from 'react';
 import { Auth, Cache } from 'aws-amplify';
+import { useHistory } from 'react-router-dom';
 import Toast from 'react-bootstrap/Toast';
 
 import Header from '../Header/Header';
 
 import logo from '../../assets/logo.png';
-import { useHistory } from 'react-router';
 
 const Login = () => {
     const history = useHistory();

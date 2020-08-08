@@ -4,6 +4,7 @@ import {Auth} from 'aws-amplify';
 import Toast from 'react-bootstrap/Toast';
 
 import logo from '../../assets/logo.png';
+import VerifyCode from './VerifyCode';
 
 const SignUp = () => {
     const history = useHistory();
@@ -53,7 +54,6 @@ const SignUp = () => {
                         showToastFunction("Código enviado! Verifique a caixa de entrada do e-mail cadastrado!", 2);
                         setSignedUp(true);
                     }
-                    console.log(response)
                 })
                 .catch(err => {
                     showToastFunction(err.code, 1);
@@ -64,27 +64,6 @@ const SignUp = () => {
                     }
                     console.log(err)
                 });
-            
-            // await signupService.singupFunction(username, password, email, phoneNumber)
-            // .then(response => {
-            //     console.log(response);
-            //     if(response){
-            //         if(!response.signedUpUser){
-            //             setSubmittingSignUp(false);
-            //             setShowToast(true);
-            //             console.log(response.error)
-            //             setToastMessage(response.error);
-            //         }else{
-            //             setSigneUp(true);
-            //             setSubmittingSignUp(false);
-            //         }
-            //     }
-            // }).catch((err) => {
-            //     if(err.message.code === 'UsernameExistsException'){
-            //         setShowToast(true);
-            //         setToastMessage('Usuário já existente.');
-            //     }
-            // })
         }
     }
 
@@ -112,28 +91,6 @@ const SignUp = () => {
                     setToastMessage("Código inválido. Por favor, solicite um novo código.");
                 }
             })
-            // await signupService.handleSubmitConfirmationSignUp(username, getConfirmationCode)
-            // .then(response => {
-            //     if(response){
-            //         if(!response.confirmationSignUp){
-            //             setSubmittingConfirmation(false);
-            //             setShowToast(true);
-            //             setToastMessage(response.error);
-            //         }else{
-            //             setSubmittingConfirmation(false);
-            //             setConfirmed(true);
-            //             history.push('/login');
-            //         }
-            //     }else{
-            //         setShowToast(true);
-            //         setToastMessage('Aguardando resposta');
-            //     }
-            // }).catch((err) => {
-            //     if(err.message.code === 'UsernameExistsException'){
-            //         setShowToast(true);
-            //         setToastMessage('Usuário já existente.');
-            //     }
-            // })
         }
     }
     
@@ -153,20 +110,21 @@ const SignUp = () => {
                         <></>
                     }
                     {getSignedUp && 
-                        <form onSubmit={handleSubmitConfirmationSignUp}>
-                            <div className="form-group">
-                                <label htmlFor="usernameConfirmationInput">Username</label>
-                                <input className="form-control" type="text" name="username" id="usernameConfirmationInput" onChange={(e) => setUsername((e.target as HTMLInputElement).value)} placeholder="Digite seu usuário" />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="codeConfirmationInput">Código de confirmação</label>
-                                <input className="form-control" type="text" name="confirmationCode" id="codeConfirmationInput" onChange={(e) => setConfirmationCode((e.target as HTMLInputElement).value)} placeholder="Digite o código de confirmação"/>
-                            </div>
-                            <button disabled={getSubmittingConfirmation} type="submit" className="btn btn-success">Confirmar</button>
-                        </form>
+                        <VerifyCode child={true} registredUsername={username}/>
+                        // <form onSubmit={handleSubmitConfirmationSignUp}>
+                        //     <div className="form-group">
+                        //         <label htmlFor="usernameConfirmationInput">Username</label>
+                        //         <input className="form-control" type="text" name="username" id="usernameConfirmationInput" onChange={(e) => setUsername((e.target as HTMLInputElement).value)} placeholder="Digite seu usuário" />
+                        //     </div>
+                        //     <div className="form-group">
+                        //         <label htmlFor="codeConfirmationInput">Código de confirmação</label>
+                        //         <input className="form-control" type="text" name="confirmationCode" id="codeConfirmationInput" onChange={(e) => setConfirmationCode((e.target as HTMLInputElement).value)} placeholder="Digite o código de confirmação"/>
+                        //     </div>
+                        //     <button disabled={getSubmittingConfirmation} type="submit" className="btn btn-success">Confirmar</button>
+                        // </form>
                     }
                     {!getSignedUp && 
-                        <form  onSubmit={handleSubmitSingUp}>
+                        <form onSubmit={handleSubmitSingUp}>
                             <div className="form-group">
                                 <label className="text-danger" htmlFor="usuario">Nome</label>
                                 <input type="text" className="form-control" id="usuario" onChange={(e) => setName((e.target as HTMLInputElement).value)} placeholder="Digite seu nome"/>
