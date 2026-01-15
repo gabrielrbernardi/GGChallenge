@@ -11,7 +11,7 @@
     "@types/react": "^16.9.43",
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.5",
-    "aws-amplify": "^3.0.22",
+    "aws-amplify": "^6.15.9",
     "chart.js": "^2.9.3",
     "ng2-charts": "^2.3.2",
     "primeicons": "^4.0.0",
